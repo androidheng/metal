@@ -89,8 +89,8 @@ public class YearplanServiceImpl implements YearplanService {
 		
 		if(yearplan!=null){			
 				
-			if(!StringUtils.isEmpty("")) {
-				
+			if(!StringUtils.isEmpty(yearplan.getMid())) {
+				criteria.andMidEqualTo(yearplan.getMid());
 			}
 		}
 		

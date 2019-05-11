@@ -11,18 +11,9 @@
 </head>
 	<body>
 		<div class="input-group-btn" style="text-align: center;">
-			<button type="button" class="btn btn-import btn-derive">导出测试信息</button><br><br>
-			<button type="button" class="btn btn-export btn-pdf">导出实时数据</button><br><br>
 			<button type="button" onclick="doHistorydata();">导出历史数据</button><br><br>
 		</div>
 		<script type="text/javascript">
-		function doImportPdf(){
-			location.href="<%=basePath%>data/exportrealtime?cid=4&type=1";
-		}
- 
-		function doImprotObject(){
-			location.href='<%=basePath%>data/export';
-		}
 		function doHistorydata(){
 			location.href='<%=basePath%>base/exporthistory?mid=1&date=2019-05';
 		}

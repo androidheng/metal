@@ -28,5 +28,7 @@ public interface TbDataMapper {
 
     int updateByPrimaryKey(TbData record);
     
+    List<TbData> findPeiData(@Param("mid") Integer mid, @Param("wid") Integer wid);
+    
     
 }

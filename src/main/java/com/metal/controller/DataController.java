@@ -11,7 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.metal.pojo.TbData;
+import com.metal.pojo.TbMine;
+import com.metal.pojo.TbWarehouse;
 import com.metal.service.DataService;
+import com.metal.service.MineService;
+import com.metal.service.WarehouseService;
 import com.metal.utils.DateUtils;
 
 import entity.PageResult;
@@ -27,6 +31,10 @@ public class DataController {
 
 	@Autowired
 	private DataService dataService;
+	@Autowired
+	private MineService mineService;
+	@Autowired
+	private WarehouseService warehouseService;
 	
 	/**
 	 * 返回全部列表
@@ -59,7 +67,10 @@ public class DataController {
 	public Result addOrUpdate(@RequestBody TbData data){
 		if(StringUtils.isEmpty(data.getId())) {
 			try {
-			data.setCreatetime(DateUtils.getCurrent());
+				TbMine tbMine=mineService.findOne(data.getMid());
+				TbWarehouse tbWarehouse=warehouseService.findOne(data.getWid());
+			data.setMinename(tbMine.getMinename());
+			data.setWarename(tbWarehouse.getWarename());
 			dataService.add(data);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -117,13 +128,28 @@ public class DataController {
 	 */
 	 @ResponseBody
 	@RequestMapping("/search")
-	public PageResult search(String key, int page, int limit  ){
+	public PageResult search(Integer mid,Integer wid, int page, int limit  ){
 		TbData data=new TbData();
-		if(!StringUtils.isEmpty(key)) {
-			
+		if(!StringUtils.isEmpty(mid)) {
+			data.setMid(mid);
+		}
+		if(!StringUtils.isEmpty(wid)) {
+			data.setWid(wid);
 		}
 		return dataService.findPage(data, page, limit);		
 	}
+	 @ResponseBody
+	 @RequestMapping("/search2")
+	 public PageResult search2(Integer mid,Integer wid, int page, int limit  ){
+		 TbData data=new TbData();
+		 if(!StringUtils.isEmpty(mid)) {
+			 data.setMid(mid);
+		 }
+		 if(!StringUtils.isEmpty(wid)) {
+			 data.setWid(wid);
+		 }
+		 return dataService.findPage2(data, page, limit);		
+	 }
 	
 	 
 	

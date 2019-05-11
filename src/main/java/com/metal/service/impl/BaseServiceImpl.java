@@ -89,8 +89,8 @@ public class BaseServiceImpl implements BaseService {
 		
 		if(base!=null){			
 				
-			if(!StringUtils.isEmpty("")) {
-				
+			if(!StringUtils.isEmpty(base.getMid())) {
+				criteria.andMidEqualTo(base.getMid());
 			}
 		}
 		

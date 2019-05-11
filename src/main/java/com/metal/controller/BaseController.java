@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.metal.pojo.TbBase;
 import com.metal.pojo.TbData;
+import com.metal.pojo.TbMine;
 import com.metal.pojo.TbUser;
 import com.metal.service.BaseService;
+import com.metal.service.MineService;
 import com.metal.utils.DateUtils;
 import com.metal.utils.ExcelBean;
 import com.metal.utils.ExcelUtil;
@@ -39,6 +41,8 @@ import entity.Result;
 @RequestMapping("/base")
 public class BaseController {
 
+	@Autowired
+	private MineService mineService;
 	@Autowired
 	private BaseService baseService;
 	
@@ -73,7 +77,8 @@ public class BaseController {
 	public Result addOrUpdate(@RequestBody TbBase base){
 		if(StringUtils.isEmpty(base.getId())) {
 			try {
-				base.setCreatetime(DateUtils.getCurrent());
+				TbMine tbMine = mineService.findOne(base.getMid());
+				base.setMinename(tbMine.getMinename());
 			baseService.add(base);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -130,11 +135,11 @@ public class BaseController {
 	 * @return
 	 */
 	 @ResponseBody
-	@RequestMapping("/search")
+	@RequestMapping(value="/search",produces = "application/json;charset=UTF-8")
 	public PageResult search(String key, int page, int limit  ){
 		TbBase base=new TbBase();
 		if(!StringUtils.isEmpty(key)) {
-			
+			base.setMid(Integer.parseInt(key));
 		}
 		return baseService.findPage(base, page, limit);		
 	}
@@ -172,7 +177,7 @@ public class BaseController {
 		public Object findZhuData(Integer mid,String date,HttpSession session) {
 			TbUser user=(TbUser) session.getAttribute("user");
 			user=new TbUser();
-			user.setType(1);
+			user.setUsertype(1);
 			if(user!=null){
 				List<Object> series=new ArrayList<>();
 				List<String> data1=new ArrayList<>();
@@ -201,7 +206,7 @@ public class BaseController {
 		 String dates=DateUtils.getName();
 			TbUser user=(TbUser) session.getAttribute("user");
 			user=new TbUser();
-			user.setType(1);
+			user.setUsertype(1);
 			String searchId;
 			if(user!=null){ 
 				List<TbBase> datas=baseService.findHistoryData(mid,date);

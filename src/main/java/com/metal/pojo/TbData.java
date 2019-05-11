@@ -16,6 +16,8 @@ public class TbData {
     private String tonnage;
 
     private String createtime;
+    
+    private String nums;
 
     public Integer getId() {
         return id;
@@ -80,4 +82,13 @@ public class TbData {
     public void setCreatetime(String createtime) {
         this.createtime = createtime == null ? null : createtime.trim();
     }
+
+	public String getNums() {
+		return nums;
+	}
+
+	public void setNums(String nums) {
+		this.nums = nums;
+	}
+    
 }

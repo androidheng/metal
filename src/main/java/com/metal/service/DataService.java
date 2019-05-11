@@ -63,6 +63,9 @@ public interface DataService {
 	 * @return
 	 */
 	public List<TbData> findHistoryData(Integer mid,String date);
+
+
+	public PageResult findPage2(TbData data, int page, int limit);
 	
 	
 }

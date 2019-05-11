@@ -1,6 +1,8 @@
 package com.metal.controller;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,5 +121,19 @@ public class UserController {
 		}
 		return userService.findPage(user, page, limit);		
 	}
-	
+		@ResponseBody
+		@RequestMapping("/login")
+		public Result login(@RequestBody TbUser user,HttpSession session){
+			try {
+				TbUser loginUser=userService.login(user);
+				if(loginUser!=null) {
+					session.setAttribute("login", loginUser);
+					return new Result(true, "登录成功");
+				}
+				return new Result(false, "登录失败");
+			} catch (Exception e) {
+				e.printStackTrace();
+				return new Result(false, "登录失败");
+			}
+		}
 }

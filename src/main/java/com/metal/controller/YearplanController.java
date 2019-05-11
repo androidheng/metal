@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.metal.pojo.TbMine;
+import com.metal.pojo.TbWarehouse;
 import com.metal.pojo.TbYearplan;
+import com.metal.service.MineService;
 import com.metal.service.YearplanService;
 
 import entity.PageResult;
@@ -23,7 +27,8 @@ public class YearplanController {
 
 	@Autowired
 	private YearplanService yearplanService;
-	
+	@Autowired
+	private MineService mineService;
 	/**
 	 * 返回全部列表
 	 * @return
@@ -55,6 +60,8 @@ public class YearplanController {
 	public Result addOrUpdate(@RequestBody TbYearplan yearplan){
 		if(StringUtils.isEmpty(yearplan.getId())) {
 			try {
+				TbMine tbMine = mineService.findOne(yearplan.getMid());
+				yearplan.setMinename(tbMine.getMinename());
 			yearplanService.add(yearplan);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -115,7 +122,7 @@ public class YearplanController {
 	public PageResult search(String key, int page, int limit  ){
 		TbYearplan yearplan=new TbYearplan();
 		if(!StringUtils.isEmpty(key)) {
-			
+			yearplan.setMid(Integer.parseInt(key));
 		}
 		return yearplanService.findPage(yearplan, page, limit);		
 	}

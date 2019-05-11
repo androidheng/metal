@@ -10,6 +10,7 @@
     <result column="warename" property="warename" jdbcType="VARCHAR" />
     <result column="tonnage" property="tonnage" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+    <result column="nums" property="nums" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -255,5 +256,19 @@
       createtime = #{createtime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+  <select id="findPeiData" resultMap="BaseResultMap">
+  	SELECT a.`carno`,a.`minename`,a.`warename`,SUM(a.`tonnage`) tonnage,
+  	(SELECT COUNT(0) FROM tb_data aa WHERE aa.carno=a.`carno`) nums
+	FROM tb_data a 
+	 <where>
+	 <if test="wid != null" >
+        a.`wid` = #{wid,jdbcType=INTEGER}
+     </if>
+	<if test="mid != null" >
+        a.`mid` = #{mid,jdbcType=INTEGER}
+     </if>
+	 </where>
+	
+	GROUP BY a.`carno`,a.`minename`,a.`warename`
+  </select>
 </mapper>

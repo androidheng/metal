@@ -89,11 +89,13 @@ public class DataServiceImpl implements DataService {
 		
 		if(data!=null){			
 				
-			if(!StringUtils.isEmpty("")) {
-				
+			if(!StringUtils.isEmpty(data.getMid())) {
+				criteria.andMidEqualTo(data.getMid());
+			}
+			if(!StringUtils.isEmpty(data.getWid())) {
+				criteria.andWidEqualTo(data.getWid());
 			}
 		}
-		
 		Page<TbData> page= (Page<TbData>)dataMapper.selectByExample(example);		
 		return new PageResult(0,"",page.getTotal(), page.getResult());
 	}
@@ -101,6 +103,15 @@ public class DataServiceImpl implements DataService {
 		@Override
 		public List<TbData> findHistoryData(Integer mid,String date) {
 			return null;
+		}
+
+		@Override
+		public PageResult findPage2(TbData data, int pageNum, int pageSize) {
+			PageHelper.startPage(pageNum, pageSize);
+			
+			Page<TbData> page= (Page<TbData>)dataMapper.findPeiData(data.getMid(), data.getWid());		
+//			Page<TbData> page= (Page<TbData>)dataMapper.findPeiData(data.getMid(), data.getWid());		
+			return new PageResult(0,"",page.getTotal(), page.getResult());
 		}
 	
 }
