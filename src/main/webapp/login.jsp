@@ -50,7 +50,7 @@
                <div class="layui-input-block">
                     <select name="usertype" lay-verify="required">
                         <option value=""></option>
-                        <option value="0">统计员</option>
+                        <option value="0">统计员 </option>
                         <option value="1">管理员</option>
                     </select>
                  </div>
