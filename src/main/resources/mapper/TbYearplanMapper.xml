@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.metal.mapper.TbYearplanMapper" >
+  <resultMap id="BaseResultMap" type="com.metal.pojo.TbYearplan" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mid" property="mid" jdbcType="INTEGER" />
+    <result column="minename" property="minename" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="VARCHAR" />
+    <result column="goodsweight" property="goodsweight" jdbcType="VARCHAR" />
+    <result column="machine1" property="machine1" jdbcType="VARCHAR" />
+    <result column="machine2" property="machine2" jdbcType="VARCHAR" />
+    <result column="maintenance" property="maintenance" jdbcType="VARCHAR" />
+    <result column="wage" property="wage" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mid, minename, quantity, goodsweight, machine1, machine2, maintenance, wage, 
+    createtime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.metal.pojo.TbYearplanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_yearplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_yearplan
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_yearplan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.metal.pojo.TbYearplanExample" >
+    delete from tb_yearplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.metal.pojo.TbYearplan" >
+    insert into tb_yearplan (id, mid, minename, 
+      quantity, goodsweight, machine1, 
+      machine2, maintenance, wage, 
+      createtime)
+    values (#{id,jdbcType=INTEGER}, #{mid,jdbcType=INTEGER}, #{minename,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=VARCHAR}, #{goodsweight,jdbcType=VARCHAR}, #{machine1,jdbcType=VARCHAR}, 
+      #{machine2,jdbcType=VARCHAR}, #{maintenance,jdbcType=VARCHAR}, #{wage,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.metal.pojo.TbYearplan" >
+    insert into tb_yearplan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mid != null" >
+        mid,
+      </if>
+      <if test="minename != null" >
+        minename,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="goodsweight != null" >
+        goodsweight,
+      </if>
+      <if test="machine1 != null" >
+        machine1,
+      </if>
+      <if test="machine2 != null" >
+        machine2,
+      </if>
+      <if test="maintenance != null" >
+        maintenance,
+      </if>
+      <if test="wage != null" >
+        wage,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mid != null" >
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="minename != null" >
+        #{minename,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsweight != null" >
+        #{goodsweight,jdbcType=VARCHAR},
+      </if>
+      <if test="machine1 != null" >
+        #{machine1,jdbcType=VARCHAR},
+      </if>
+      <if test="machine2 != null" >
+        #{machine2,jdbcType=VARCHAR},
+      </if>
+      <if test="maintenance != null" >
+        #{maintenance,jdbcType=VARCHAR},
+      </if>
+      <if test="wage != null" >
+        #{wage,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.metal.pojo.TbYearplanExample" resultType="java.lang.Integer" >
+    select count(*) from tb_yearplan
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_yearplan
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.mid != null" >
+        mid = #{record.mid,jdbcType=INTEGER},
+      </if>
+      <if test="record.minename != null" >
+        minename = #{record.minename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsweight != null" >
+        goodsweight = #{record.goodsweight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machine1 != null" >
+        machine1 = #{record.machine1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machine2 != null" >
+        machine2 = #{record.machine2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maintenance != null" >
+        maintenance = #{record.maintenance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wage != null" >
+        wage = #{record.wage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_yearplan
+    set id = #{record.id,jdbcType=INTEGER},
+      mid = #{record.mid,jdbcType=INTEGER},
+      minename = #{record.minename,jdbcType=VARCHAR},
+      quantity = #{record.quantity,jdbcType=VARCHAR},
+      goodsweight = #{record.goodsweight,jdbcType=VARCHAR},
+      machine1 = #{record.machine1,jdbcType=VARCHAR},
+      machine2 = #{record.machine2,jdbcType=VARCHAR},
+      maintenance = #{record.maintenance,jdbcType=VARCHAR},
+      wage = #{record.wage,jdbcType=VARCHAR},
+      createtime = #{record.createtime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.metal.pojo.TbYearplan" >
+    update tb_yearplan
+    <set >
+      <if test="mid != null" >
+        mid = #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="minename != null" >
+        minename = #{minename,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsweight != null" >
+        goodsweight = #{goodsweight,jdbcType=VARCHAR},
+      </if>
+      <if test="machine1 != null" >
+        machine1 = #{machine1,jdbcType=VARCHAR},
+      </if>
+      <if test="machine2 != null" >
+        machine2 = #{machine2,jdbcType=VARCHAR},
+      </if>
+      <if test="maintenance != null" >
+        maintenance = #{maintenance,jdbcType=VARCHAR},
+      </if>
+      <if test="wage != null" >
+        wage = #{wage,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.metal.pojo.TbYearplan" >
+    update tb_yearplan
+    set mid = #{mid,jdbcType=INTEGER},
+      minename = #{minename,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=VARCHAR},
+      goodsweight = #{goodsweight,jdbcType=VARCHAR},
+      machine1 = #{machine1,jdbcType=VARCHAR},
+      machine2 = #{machine2,jdbcType=VARCHAR},
+      maintenance = #{maintenance,jdbcType=VARCHAR},
+      wage = #{wage,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
