@@ -60,8 +60,7 @@
     <script>
     var myChart = echarts.init(document.getElementById('main'));   
 
-    var 
-    option = {
+    var option = {
     	    tooltip : {
     	        trigger: 'axis',
     	        axisPointer : {            // 坐标轴指示器，坐标轴触发有效

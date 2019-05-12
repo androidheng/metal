@@ -77,18 +77,43 @@
     	        areaStyle: {}
     	    }]
     	};
-    var barOption =  {
-    	    xAxis: {
-    	        type: 'category',
-    	        data: ['2019-05-11','2019-05-11']
+    var barOption  = {
+    	    tooltip : {
+    	        trigger: 'axis',
+    	        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+    	            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+    	        }
     	    },
-    	    yAxis: {
-    	        type: 'value'
+    	   
+    	    grid: {
+    	        left: '3%',
+    	        right: '4%',
+    	        bottom: '3%',
+    	        containLabel: true
     	    },
-    	    series: [{
-    	        data: [],
-    	        type: 'bar'
-    	    }]
+    	    xAxis : [
+    	        {
+    	            type : 'category',
+    	            data : []
+    	        }
+    	    ],
+    	    yAxis : [
+    	        {
+    	            type : 'value'
+    	        }
+    	    ],
+    	    series : [
+    	        {
+    	           
+    	            type:'bar',
+    	            data:[]
+    	        },
+    	        {
+    	           
+    	            type:'bar',
+    	            data:[]
+    	        },
+    	    ]
     	};
 
    
@@ -175,8 +200,9 @@
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
                  success:function(res){//res为相应体,function为回调函数
-                	 barOption.xAxis.data = res.xdata;
-                	 barOption.series[0].data = res.data;
+                	 barOption.series[0].data = res.data1;
+                	 barOption.series[1].data = res.data2;
+                	 barOption.xAxis[0].data = res.xdata;
                 	 console.log('barOption:',barOption)
                  	 bar.setOption(barOption)
                 	 console.log(res)
