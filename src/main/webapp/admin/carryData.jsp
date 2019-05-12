@@ -26,17 +26,17 @@
            <div class="layui-form-item">
                <label class="layui-form-label">日期</label>
                <div class="layui-input-block">
-                  <input  type="text" id="createDate" name="createtime"  class="layui-input spacil"> 
+                  <input  type="text" id="createDate" name="createtime"   class="layui-input spacil"> 
                </div>
            </div>
            <div class="layui-form-item">
-              <label class="layui-form-label">矿山名</label>
+              <label class="layui-form-label">出发地</label>
                 <div class="layui-input-block">
                    <select id="addMid" name="mid" lay-verify="required"></select>
                </div>
            </div>
            <div class="layui-form-item">
-              <label class="layui-form-label">仓库名</label>
+              <label class="layui-form-label">目的地</label>
                 <div class="layui-input-block">
                    <select id="addWid" name="wid" lay-verify="required"></select>
                </div>
@@ -44,7 +44,7 @@
            <div class="layui-form-item">
                <label class="layui-form-label">车辆编号</label>
                <div class="layui-input-block">
-                 <input type="text" name="carno" required  lay-verify="required" class="layui-input">
+                 <input type="text" name="carno"  required  lay-verify="required" class="layui-input spacil">
                </div>
            </div>
            <div class="layui-form-item">
@@ -53,7 +53,7 @@
                  <input type="number" name="tonnage"  required  lay-verify="required" class="layui-input spacil">吨
                </div>
            </div>
-           <div class="layui-form-item">
+          <div class="layui-form-item">
             <div class="layui-input-block">
                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
@@ -66,7 +66,7 @@
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                   <a>首页</a>
-                  <a>运载数据</a>
+                  <a>实际数据管理</a>
                 </span>
                 
             </div>
@@ -76,6 +76,7 @@
                 <div class="layui-card-body">
                      <div class="demoTable">
                        <div class="layui-inline">
+                                                                           <div class="layui-inline">
                                                                               出发地
                           <div class="layui-inline">
                              <form class="layui-form" action="">
@@ -89,7 +90,6 @@
                              </form>
                           </div>                                                
                         </div>
-                        
                       <button class="layui-btn" data-type="reload">查询</button>
                     </div>
                     <table id="demo" lay-filter="demo" ></table>
@@ -101,8 +101,12 @@
     <script src="<%=basePath%>assets/layui.all.js"></script>
     <script type="text/html" id="toolbarDemo">
      <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add">添加运载数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加基础数据</button>
      </div>
+    </script>
+    <script type="text/html" id="barDemo">
+      <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="edit">编辑</a>
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     
    
@@ -117,11 +121,12 @@
 
           ,url:'<%=basePath%>data/search'
           ,cols: [[ //标题栏
-             {field: 'carno', title: '车辆编号' }
-            ,{field: 'tonnage', title: '运载吨数'}
-            ,{field: 'minename', title: '出发地'}
-            ,{field: 'warename', title: '目的地'}
-            ,{field: 'createtime', title: '创建时间'}
+        	   {field: 'carno', title: '车辆编号' }
+              ,{field: 'tonnage', title: '运载吨数'}
+              ,{field: 'minename', title: '出发地'}
+              ,{field: 'warename', title: '目的地'}
+              ,{field: 'createtime', title: '创建时间'}
+            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
            
          ]]
          
@@ -131,8 +136,8 @@
         ,page: true //是否显示分页
         ,limits: [5, 7, 10]
         ,limit: 5 //每页默认显示的数量
-       });
-       var  active = {
+        });
+        var  active = {
     	       reload: function(){
     	         var mid = $('#mid');
     	         var wid = $('#wid');
@@ -143,8 +148,8 @@
     	             curr: 1 //重新从第 1 页开始
     	           }
     	           ,where: {
-    	             mid: mid.val(),
-    	             wid: wid.val(),
+    	        	   mid: mid.val(),
+    	        	   wid: wid.val(),
     	           }
     	         });
     	       }
@@ -162,30 +167,45 @@
     	        form.render();
     	    });
        }
-       
      
-       //获取矿山名称
-       function getMine(){
-    	   $.ajax({
-               url:"<%=basePath%>mine/findAll",
-               type:'post',//method请求方式，get或者post
-               dataType:'json',//预期服务器返回的数据类型
-               contentType: "application/json; charset=utf-8",
-               success:function(res){//res为相应体,function为回调函数
-              	   let options = "<option value=''></option>"
-                   res.forEach(item=>{
-                  	 options+="<option value='" + item.id + "'>" + item.minename + "</option>";
-                   })
-                  $("#mid").html(options)
-                  $("#addMid").html(options)
-                  renderForm()
-               },
-               error:function(){
-                
-               }
+       //头工具栏事件
+       table.on('toolbar(demo)', function(obj){
+    	  switch(obj.event){
+    	  case 'add':
+    	        add()
+    	       break;
+    	         
+    	  };
+       });
+       //监听行工具事件
+       table.on('tool(demo)', function(obj){
+         var data = obj.data;
+         //console.log(obj)
+         if(obj.event === 'del'){
+           layer.confirm('真的删除行么', function(index){
+        	  $.ajax({
+                   url:"<%=basePath%>data/delete",
+                   type:'post',//method请求方式，get或者post
+                   dataType:'json',//预期服务器返回的数据类型
+                   data:JSON.stringify({id:data.id}),
+                   contentType: "application/json; charset=utf-8",
+                   success:function(res){//res为相应体,function为回调函数
+                	   obj.del();
+                       layer.close(index);
+                       $(".layui-laypage-btn")[0].click();
+                    
+                   },
+                   error:function(){
+                       layer.alert('操作失败！！！',{icon:5});
+                   }
+                 });
+           
            });
-       }
-      //获取仓库名称
+         }else{
+        	 add(data)
+         }
+       });
+     //获取仓库名称
        function getWid(){
     	   $.ajax({
                url:"<%=basePath%>warehouse/findAll",
@@ -206,16 +226,31 @@
                }
            });
        }
-       //头工具栏事件
-       table.on('toolbar(demo)', function(obj){
-    	  switch(obj.event){
-    	  case 'add':
-    	        add()
-    	       break;
-    	         
-    	  };
-       });
+       //获取矿山名称
+       function getMine(){
+    	   $.ajax({
+               url:"<%=basePath%>mine/findAll",
+               type:'post',//method请求方式，get或者post
+               dataType:'json',//预期服务器返回的数据类型
+               contentType: "application/json; charset=utf-8",
+               success:function(res){//res为相应体,function为回调函数
+              	   let options = "<option value=''></option>"
+                   res.forEach(item=>{
+                  	 options+="<option value='" + item.id + "'>" + item.minename + "</option>";
+                   })
+                  $("#mid").html(options)
+                  $("#addMid").html(options)
+                
+                  renderForm()
+               },
+               error:function(){
+                
+               }
+           });
+       }
+       
        function add(data){
+    	   let row = data
     	   layer.open({
     	         type: 1
     	        ,title: false //不显示标题栏
@@ -228,16 +263,23 @@
     	        ,content: $("#box"),
     	         success:function(layero, index){
     	        	  $("#addGoodsForm")[0].reset();
-	        	       renderForm()
+    	        	  renderForm()
                       layui.use('laydate', function(){
     	             	  var laydate = layui.laydate;
     	             	   //执行一个laydate实例
     	             	  laydate.render({
-    	             	    elem: '#createDate' //指定元素
+    	             	    elem: '#createDate', //指定元素
+    	             	    type:'date'
     	             	  });
     	               });
+                     
+                      //表单初始赋值
+                      
+                      row?form.val('formTest', row):form.val('formTest', {})
                       //监听提交
                       form.on('submit(demo1)', function(data){
+                    	  console.log( data.field)
+                    	  data.field.id = row?row.id:''
                     	  $.ajax({
                               url:"<%=basePath%>data/addOrUpdate",
                               type:'post',//method请求方式，get或者post
@@ -256,14 +298,12 @@
                         return false;
                       });
     	        	
-  	    	}
-      	 
-    	        
-    	       ,end:function(index){
+  	    	       }
+      	        ,end:function(index){
     	        	layer.close(index)
     	        }
     	      })
-       }
+        }
      
      
 });

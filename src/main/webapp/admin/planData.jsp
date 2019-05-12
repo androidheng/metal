@@ -22,39 +22,59 @@
 </head>
 <body class="layui-view-body">
      <div class="layui-content" id="box" style="display:none">
-        <form class="layui-form" action="" lay-filter="formTest" id="addGoodsForm">
-           <div class="layui-form-item">
+        <form class="layui-form" action="" lay-filter="formTest"  id="addGoodsForm">
+          
+          
+         <div class="layui-form-item">
                <label class="layui-form-label">日期</label>
                <div class="layui-input-block">
-                  <input  type="text" id="createDate" name="createtime"  class="layui-input spacil"> 
+                  <input  type="text" id="createDate" name="createtime"   class="layui-input spacil"> 
                </div>
            </div>
            <div class="layui-form-item">
               <label class="layui-form-label">矿山名</label>
                 <div class="layui-input-block">
-                   <select id="addMid" name="mid" lay-verify="required"></select>
+                   <select id="mid" name="mid" lay-verify="required"></select>
                </div>
            </div>
            <div class="layui-form-item">
-              <label class="layui-form-label">仓库名</label>
-                <div class="layui-input-block">
-                   <select id="addWid" name="wid" lay-verify="required"></select>
-               </div>
-           </div>
-           <div class="layui-form-item">
-               <label class="layui-form-label">车辆编号</label>
+               <label class="layui-form-label">货物产量</label>
                <div class="layui-input-block">
-                 <input type="text" name="carno" required  lay-verify="required" class="layui-input">
+                 <input type="number" name="goodsweight"  required  lay-verify="required" class="layui-input spacil">吨
                </div>
            </div>
            <div class="layui-form-item">
-               <label class="layui-form-label">运载吨数</label>
+               <label class="layui-form-label">挖机耗油量</label>
                <div class="layui-input-block">
-                 <input type="number" name="tonnage"  required  lay-verify="required" class="layui-input spacil">吨
+                 <input type="number" name="machine1"  required  lay-verify="required" class="layui-input spacil">吨
                </div>
            </div>
            <div class="layui-form-item">
-            <div class="layui-input-block">
+               <label class="layui-form-label">卡车耗油量</label>
+               <div class="layui-input-block">
+                 <input type="number" name="machine2"  required  lay-verify="required" class="layui-input spacil">吨
+               </div>
+           </div>
+           <div class="layui-form-item">
+               <label class="layui-form-label">土方量</label>
+               <div class="layui-input-block">
+                 <input type="number" name="quantity"  required  lay-verify="required" class="layui-input spacil">吨
+               </div>
+           </div>
+            <div class="layui-form-item">
+               <label class="layui-form-label">设备维修费用</label>
+               <div class="layui-input-block">
+                 <input type="number" name="maintenance"  required  lay-verify="required" class="layui-input spacil">元
+               </div>
+           </div>
+           <div class="layui-form-item">
+               <label class="layui-form-label">每土方工资</label>
+               <div class="layui-input-block">
+                 <input type="number" name="wage"  required  lay-verify="required" class="layui-input spacil">元
+               </div>
+           </div>
+          <div class="layui-form-item">
+          <div class="layui-input-block">
                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
@@ -66,7 +86,7 @@
             <div class="pagewrap">
                 <span class="layui-breadcrumb">
                   <a>首页</a>
-                  <a>运载数据</a>
+                  <a>计划数据管理</a>
                 </span>
                 
             </div>
@@ -76,20 +96,12 @@
                 <div class="layui-card-body">
                      <div class="demoTable">
                        <div class="layui-inline">
-                                                                              出发地
-                          <div class="layui-inline">
-                             <form class="layui-form" action="">
-                               <select  id="mid" lay-verify="required"></select>
-                             </form>
-                          </div>
-                                                                             目的地
-                          <div class="layui-inline">
-                             <form class="layui-form" action="">
-                               <select  id="wid" lay-verify="required"></select>
-                             </form>
-                          </div>                                                
+                                                                              矿山名称
+                         <div class="layui-inline">
+                          <form class="layui-form" action="">
+                           <select  id="mini" lay-verify="required"></select>
+                         </form>
                         </div>
-                        
                       <button class="layui-btn" data-type="reload">查询</button>
                     </div>
                     <table id="demo" lay-filter="demo" ></table>
@@ -101,8 +113,12 @@
     <script src="<%=basePath%>assets/layui.all.js"></script>
     <script type="text/html" id="toolbarDemo">
      <div class="layui-btn-container">
-        <button class="layui-btn layui-btn-sm" lay-event="add">添加运载数据</button>
+        <button class="layui-btn layui-btn-sm" lay-event="add">添加基础数据</button>
      </div>
+    </script>
+    <script type="text/html" id="barDemo">
+      <a class="layui-btn layui-btn-success layui-btn-xs" lay-event="edit">编辑</a>
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     
    
@@ -115,13 +131,17 @@
            elem: '#demo'
           ,toolbar: '#toolbarDemo'
 
-          ,url:'<%=basePath%>data/search'
+          ,url:'<%=basePath%>yearplan/search'
           ,cols: [[ //标题栏
-             {field: 'carno', title: '车辆编号' }
-            ,{field: 'tonnage', title: '运载吨数'}
-            ,{field: 'minename', title: '出发地'}
-            ,{field: 'warename', title: '目的地'}
-            ,{field: 'createtime', title: '创建时间'}
+        	   {field: 'goodsweight', title: '货物产量' }
+              ,{field: 'machine1', title: '挖机耗油量'}
+              ,{field: 'machine2', title: '卡车耗油量'}
+              ,{field: 'maintenance', title: '设备维修费用'}
+              ,{field: 'minename', title: '矿山名'}
+              ,{field: 'quantity', title: '土方量'}
+              ,{field: 'wage', title: '每土方工资'}
+              ,{field: 'createtime', title: '创建时间'}
+            ,{fixed: 'right', title:'操作', toolbar: '#barDemo', width:150}
            
          ]]
          
@@ -131,11 +151,10 @@
         ,page: true //是否显示分页
         ,limits: [5, 7, 10]
         ,limit: 5 //每页默认显示的数量
-       });
-       var  active = {
+        });
+        var  active = {
     	       reload: function(){
-    	         var mid = $('#mid');
-    	         var wid = $('#wid');
+    	         var mid = $('#mini');
     	        // var usertype = $('#usertype');
     	         //执行重载
     	         table.reload('testReload', {
@@ -143,8 +162,7 @@
     	             curr: 1 //重新从第 1 页开始
     	           }
     	           ,where: {
-    	             mid: mid.val(),
-    	             wid: wid.val(),
+    	             key: mid.val(),
     	           }
     	         });
     	       }
@@ -155,15 +173,50 @@
     	    active[type] ? active[type].call(this) : '';
     	});
        getMine()
-       getWid()
        function renderForm(){
     	    layui.use('form', function(){
     	        var form = layui.form;//高版本建议把括号去掉，有的低版本，需要加()
     	        form.render();
     	    });
        }
-       
      
+       //头工具栏事件
+       table.on('toolbar(demo)', function(obj){
+    	  switch(obj.event){
+    	  case 'add':
+    	        add()
+    	       break;
+    	         
+    	  };
+       });
+       //监听行工具事件
+       table.on('tool(demo)', function(obj){
+         var data = obj.data;
+         //console.log(obj)
+         if(obj.event === 'del'){
+           layer.confirm('真的删除行么', function(index){
+        	  $.ajax({
+                   url:"<%=basePath%>yearplan/delete",
+                   type:'post',//method请求方式，get或者post
+                   dataType:'json',//预期服务器返回的数据类型
+                   data:JSON.stringify({id:data.id}),
+                   contentType: "application/json; charset=utf-8",
+                   success:function(res){//res为相应体,function为回调函数
+                	   obj.del();
+                       layer.close(index);
+                       $(".layui-laypage-btn")[0].click();
+                    
+                   },
+                   error:function(){
+                       layer.alert('操作失败！！！',{icon:5});
+                   }
+                 });
+           
+           });
+         }else{
+        	 add(data)
+         }
+       });
        //获取矿山名称
        function getMine(){
     	   $.ajax({
@@ -177,7 +230,8 @@
                   	 options+="<option value='" + item.id + "'>" + item.minename + "</option>";
                    })
                   $("#mid").html(options)
-                  $("#addMid").html(options)
+                  $("#mini").html(options)
+                
                   renderForm()
                },
                error:function(){
@@ -185,37 +239,9 @@
                }
            });
        }
-      //获取仓库名称
-       function getWid(){
-    	   $.ajax({
-               url:"<%=basePath%>warehouse/findAll",
-               type:'post',//method请求方式，get或者post
-               dataType:'json',//预期服务器返回的数据类型
-               contentType: "application/json; charset=utf-8",
-               success:function(res){//res为相应体,function为回调函数
-              	   let options = "<option value=''></option>"
-                   res.forEach(item=>{
-                  	 options+="<option value='" + item.id + "'>" + item.warename + "</option>";
-                   })
-                  $("#wid").html(options)
-                  $("#addWid").html(options)
-                  renderForm()
-               },
-               error:function(){
-                
-               }
-           });
-       }
-       //头工具栏事件
-       table.on('toolbar(demo)', function(obj){
-    	  switch(obj.event){
-    	  case 'add':
-    	        add()
-    	       break;
-    	         
-    	  };
-       });
+       
        function add(data){
+    	   let row = data
     	   layer.open({
     	         type: 1
     	        ,title: false //不显示标题栏
@@ -228,18 +254,25 @@
     	        ,content: $("#box"),
     	         success:function(layero, index){
     	        	  $("#addGoodsForm")[0].reset();
-	        	       renderForm()
+  	        	       renderForm()
                       layui.use('laydate', function(){
     	             	  var laydate = layui.laydate;
     	             	   //执行一个laydate实例
     	             	  laydate.render({
-    	             	    elem: '#createDate' //指定元素
+    	             	    elem: '#createDate', //指定元素
+    	             	    type:'year'
     	             	  });
     	               });
+                     
+                      //表单初始赋值
+                      
+                      row?form.val('formTest', row):form.val('formTest', {})
                       //监听提交
                       form.on('submit(demo1)', function(data){
+                    	  console.log( data.field)
+                    	  data.field.id = row?row.id:''
                     	  $.ajax({
-                              url:"<%=basePath%>data/addOrUpdate",
+                              url:"<%=basePath%>yearplan/addOrUpdate",
                               type:'post',//method请求方式，get或者post
                               dataType:'json',//预期服务器返回的数据类型
                               data:JSON.stringify(data.field),
@@ -256,14 +289,12 @@
                         return false;
                       });
     	        	
-  	    	}
-      	 
-    	        
-    	       ,end:function(index){
+  	    	       }
+      	        ,end:function(index){
     	        	layer.close(index)
     	        }
     	      })
-       }
+        }
      
      
 });

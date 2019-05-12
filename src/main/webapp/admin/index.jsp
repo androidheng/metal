@@ -50,46 +50,22 @@
                     <li class="layui-nav-item">
                             <a >
                                 <i class="layui-icon">&#xe612;</i>
-                                <em>数据管理</em>
+                                <em>用户管理</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>operate/baseData.jsp">基本数据</a></dd>
-                                <dd><a href="<%=basePath%>operate/carryData.jsp">运载数据</a></dd>
-                                <dd><a href="<%=basePath%>operate/oreBlending.jsp">配矿数据</a></dd>
-                                <dd><a href="<%=basePath%>operate/wareHouse.jsp">仓库数据</a></dd>
-                                <dd><a href="<%=basePath%>operate/AnnualPlanData.jsp">年度计划数据</a></dd>
-                            </dl>
-                    </li>  
-                    <li class="layui-nav-item">
-                            <a >
-                                <i class="layui-icon layui-icon-water">&#xe636;</i>
-                                <em>数据统计</em>
-                            </a>
-                            <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>operate/historyData.jsp">历史数据查询</a></dd>
-                               
+                                <dd><a href="<%=basePath%>admin/userInfo.jsp">用户信息</a></dd>
                                
                             </dl>
                     </li>  
                     <li class="layui-nav-item">
                             <a >
                                 <i class="layui-icon layui-icon-chart-screen">&#xe629;</i>
-                                <em>报表</em>
+                                <em>信息管理</em>
                             </a>
                             <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>operate/carryTable.jsp">运载统计表</a></dd>
-                                <dd><a href="<%=basePath%>operate/oreBlendingTable.jsp">配矿统计报表</a></dd>
-                                <dd><a href="<%=basePath%>operate/wareHouseTable.jsp">仓库统计报表</a></dd>
-                            </dl>
-                    </li>  
-                    <li class="layui-nav-item">
-                            <a >
-                                <i class="layui-icon layui-icon-chart">&#xe62c;</i>
-                                <em>总体指标对比</em>
-                            </a>
-                            <dl class="layui-nav-child">
-                                <dd><a href="<%=basePath%>operate/everyMonth.jsp">每月与实际数据对比</a></dd>
-                                <dd><a href="<%=basePath%>operate/everyMonthFinished.jsp">每月完成率</a></dd>
+                                <dd><a href="<%=basePath%>admin/planData.jsp">计划数据管理</a></dd>
+                                <dd><a href="<%=basePath%>admin/realData.jsp">实际数据管理</a></dd>
+                                <dd><a href="<%=basePath%>admin/carryData.jsp">运载数据管理</a></dd>
                             </dl>
                     </li>  
                   </ul>

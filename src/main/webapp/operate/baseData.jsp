@@ -22,7 +22,7 @@
 </head>
 <body class="layui-view-body">
      <div class="layui-content" id="box" style="display:none">
-        <form class="layui-form" action="" lay-filter="formTest">
+        <form class="layui-form" action="" lay-filter="formTest"  id="addGoodsForm">
            <div class="layui-form-item">
                <label class="layui-form-label">日期</label>
                <div class="layui-input-block">
@@ -51,6 +51,12 @@
                <label class="layui-form-label">卡车耗油量</label>
                <div class="layui-input-block">
                  <input type="number" name="machine2"  required  lay-verify="required" class="layui-input spacil">吨
+               </div>
+           </div>
+           <div class="layui-form-item">
+               <label class="layui-form-label">土方量</label>
+               <div class="layui-input-block">
+                 <input type="number" name="quantity"  required  lay-verify="required" class="layui-input spacil">吨
                </div>
            </div>
             <div class="layui-form-item">
@@ -211,6 +217,8 @@
     	        ,moveType: 1 //拖拽模式，0或者1
     	        ,content: $("#box"),
     	         success:function(layero, index){
+    	        	 $("#addGoodsForm")[0].reset();
+	        	       renderForm()
                       layui.use('laydate', function(){
     	             	  var laydate = layui.laydate;
     	             	   //执行一个laydate实例
