@@ -29,4 +29,5 @@ public interface TbBaseMapper {
     int updateByPrimaryKey(TbBase record);
 
 	List<TbBase> findHistoryData(@Param("mid") Integer mid, @Param("date")  String date);
+	List<TbBase> findEveryMonth( @Param("date")  String date,@Param("mid") Integer mid);
 }

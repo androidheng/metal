@@ -66,6 +66,12 @@ public interface DataService {
 
 
 	public PageResult findPage2(TbData data, int page, int limit);
+
+
+	public PageResult findYun(String type, String date, int page, int limit);
+
+
+	public PageResult statistical(String type, Integer mid, Integer wid, String date, int page, int limit);
 	
 	
 }

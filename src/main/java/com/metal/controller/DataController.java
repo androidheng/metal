@@ -109,9 +109,9 @@ public class DataController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Result delete(Integer id){
+	public Result delete(@RequestBody TbData data){
 		try {
-			dataService.delete(id);
+			dataService.delete(data.getId());
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,6 +149,16 @@ public class DataController {
 			 data.setWid(wid);
 		 }
 		 return dataService.findPage2(data, page, limit);		
+	 }
+	 @ResponseBody
+	 @RequestMapping("/findYun")
+	 public PageResult findYun(String type,String date, int page, int limit  ){
+		 return dataService.findYun(type,date, page, limit);		
+	 }
+	 @ResponseBody
+	 @RequestMapping("/statistical")
+	 public PageResult statistical(String type,String date,Integer mid,Integer wid, int page, int limit  ){
+		 return dataService.statistical(type,mid,wid,date, page, limit);		
 	 }
 	
 	 

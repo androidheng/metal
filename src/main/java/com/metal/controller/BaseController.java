@@ -117,9 +117,9 @@ public class BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Result delete(Integer id){
+	public Result delete(@RequestBody TbBase base){
 		try {
-			baseService.delete(id);
+			baseService.delete(base.getId());
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -258,6 +258,5 @@ public class BaseController {
 					e.printStackTrace();  
 				}
 			}   
-			
 	 }
 }

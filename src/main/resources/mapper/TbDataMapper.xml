@@ -271,4 +271,49 @@
 	
 	GROUP BY a.`carno`,a.`minename`,a.`warename`
   </select>
+  <select id="findYunDay" resultMap="BaseResultMap">
+ 		SELECT * FROM tb_data a WHERE a.`createtime` =#{date,jdbcType=VARCHAR}
+  </select>
+  <select id="findYunMonth" resultMap="BaseResultMap">
+ 	SELECT * FROM tb_data a WHERE DATE_FORMAT(a.createtime,'%Y-%m') =#{date,jdbcType=VARCHAR}
+  </select>
+  <select id="findYunYear" resultMap="BaseResultMap">
+ 	SELECT * FROM tb_data a WHERE DATE_FORMAT(a.createtime,'%Y') =#{date,jdbcType=VARCHAR}
+  </select>
+  <select id="findDay" resultMap="BaseResultMap">
+ 		SELECT a.`carno`,a.`minename`,a.`warename`,SUM(a.`tonnage`) tonnage,
+		(SELECT COUNT(0) FROM tb_data aa WHERE aa.carno=a.`carno`) nums
+		FROM tb_data a WHERE a.`createtime` =#{date,jdbcType=VARCHAR}
+		<if test="wid != null" >
+         and a.`wid` = #{wid,jdbcType=INTEGER}
+	     </if>
+		<if test="mid != null" >
+        and a.`mid` = #{mid,jdbcType=INTEGER}
+     </if>
+		GROUP BY a.`carno`,a.`minename`,a.`warename`
+  </select>
+  <select id="findMonth" resultMap="BaseResultMap">
+ 		SELECT a.`carno`,a.`minename`,a.`warename`,SUM(a.`tonnage`) tonnage,
+		(SELECT COUNT(0) FROM tb_data aa WHERE aa.carno=a.`carno`) nums
+		FROM tb_data a WHERE DATE_FORMAT(a.createtime,'%Y-%m') =#{date,jdbcType=VARCHAR}
+		<if test="wid != null" >
+         and a.`wid` = #{wid,jdbcType=INTEGER}
+	     </if>
+		<if test="mid != null" >
+        and a.`mid` = #{mid,jdbcType=INTEGER}
+     </if>
+		GROUP BY a.`carno`,a.`minename`,a.`warename`
+  </select>
+  <select id="findYear" resultMap="BaseResultMap">
+ 		SELECT a.`carno`,a.`minename`,a.`warename`,SUM(a.`tonnage`) tonnage,
+		(SELECT COUNT(0) FROM tb_data aa WHERE aa.carno=a.`carno`) nums
+		FROM tb_data a WHERE DATE_FORMAT(a.createtime,'%Y') =#{date,jdbcType=VARCHAR}
+		<if test="wid != null" >
+         and a.`wid` = #{wid,jdbcType=INTEGER}
+	     </if>
+		<if test="mid != null" >
+        and a.`mid` = #{mid,jdbcType=INTEGER}
+     </if>
+		GROUP BY a.`carno`,a.`minename`,a.`warename`
+  </select>
 </mapper>

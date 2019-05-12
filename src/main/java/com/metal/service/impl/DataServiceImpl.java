@@ -110,8 +110,38 @@ public class DataServiceImpl implements DataService {
 			PageHelper.startPage(pageNum, pageSize);
 			
 			Page<TbData> page= (Page<TbData>)dataMapper.findPeiData(data.getMid(), data.getWid());		
-//			Page<TbData> page= (Page<TbData>)dataMapper.findPeiData(data.getMid(), data.getWid());		
 			return new PageResult(0,"",page.getTotal(), page.getResult());
+		}
+
+		@Override
+		public PageResult findYun(String type, String date, int pageNum, int pageSize) {
+			PageHelper.startPage(pageNum, pageSize);
+			if(type.equals("0")) {
+				Page<TbData> page= (Page<TbData>)dataMapper.findYunDay(date);		
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}else if(type.equals("1")) {
+				Page<TbData> page= (Page<TbData>)dataMapper.findYunMonth(date);		
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}else {
+				Page<TbData> page= (Page<TbData>)dataMapper.findYunYear(date);		
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}
+			
+		}
+
+		@Override
+		public PageResult statistical(String type, Integer mid, Integer wid, String date, int pageNum, int pageSize) {
+			PageHelper.startPage(pageNum, pageSize);
+			if(type.equals("0")) {
+				Page<TbData> page= (Page<TbData>)dataMapper.findDay(date, mid, wid);		
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}else if(type.equals("1")) {
+				Page<TbData> page= (Page<TbData>)dataMapper.findMonth(date, mid, wid);		
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}else {
+				Page<TbData> page= (Page<TbData>)dataMapper.findYear(date, mid, wid);		
+				return new PageResult(0,"",page.getTotal(), page.getResult());
+			}
 		}
 	
 }

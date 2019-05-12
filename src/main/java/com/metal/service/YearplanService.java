@@ -1,5 +1,7 @@
 package com.metal.service;
 import java.util.List;
+import java.util.Map;
+
 import com.metal.pojo.TbYearplan;
 
 import entity.PageResult;
@@ -57,5 +59,11 @@ public interface YearplanService {
 	 * @return
 	 */
 	public PageResult findPage(TbYearplan yearplan, int pageNum,int pageSize);
+
+
+	public List<TbYearplan> findDataByMonth(String date,Integer mid);
+
+
+	public Map findZhuData(String year,String month, Integer mid);
 	
 }

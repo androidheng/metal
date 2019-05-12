@@ -1,9 +1,12 @@
 package com.metal.mapper;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.metal.pojo.TbYearplan;
 import com.metal.pojo.TbYearplanExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface TbYearplanMapper {
     int countByExample(TbYearplanExample example);
@@ -27,4 +30,8 @@ public interface TbYearplanMapper {
     int updateByPrimaryKeySelective(TbYearplan record);
 
     int updateByPrimaryKey(TbYearplan record);
+    
+	List<TbYearplan> findEveryMonth( @Param("date")  String date,@Param("mid")  Integer mid);
+	
+	Map findBaiFen( @Param("year")  String year,@Param("month")  String month,@Param("mid")  Integer mid);
 }

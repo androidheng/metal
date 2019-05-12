@@ -57,6 +57,7 @@ public class UserController {
 	public Result addOrUpdate(@RequestBody TbUser user){
 		if(StringUtils.isEmpty(user.getId())) {
 			try {
+				user.setUsertype(0);
 			userService.add(user);
 			return new Result(true, "增加成功");
 		} catch (Exception e) {
@@ -95,9 +96,9 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/delete")
-	public Result delete(Integer id){
+	public Result delete(@RequestBody TbUser user){
 		try {
-			userService.delete(id);
+			userService.delete(user.getId());
 			return new Result(true, "删除成功"); 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,7 +118,7 @@ public class UserController {
 	public PageResult search(String key, int page, int limit  ){
 		TbUser user=new TbUser();
 		if(!StringUtils.isEmpty(key)) {
-			
+			user.setUsername(key);
 		}
 		return userService.findPage(user, page, limit);		
 	}

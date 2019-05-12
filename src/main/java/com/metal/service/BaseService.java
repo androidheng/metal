@@ -60,5 +60,8 @@ public interface BaseService {
 
 
 	public List<TbBase> findHistoryData(Integer mid, String date);
+
+
+	public List<TbBase> findDataByMonth(String date,Integer mid);
 	
 }

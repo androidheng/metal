@@ -1,5 +1,7 @@
 package com.metal.service.impl;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
@@ -97,5 +99,18 @@ public class YearplanServiceImpl implements YearplanService {
 		Page<TbYearplan> page= (Page<TbYearplan>)yearplanMapper.selectByExample(example);		
 		return new PageResult(0,"",page.getTotal(), page.getResult());
 	}
+
+		@Override
+		public List<TbYearplan> findDataByMonth(String date,Integer mid) {
+			return yearplanMapper.findEveryMonth(date,mid);
+		}
+
+		@Override
+		public Map findZhuData(String year,String month, Integer mid) {
+			System.err.println(year);
+			System.err.println(month);
+			System.err.println(mid);
+			return yearplanMapper.findBaiFen(year, month, mid);
+		}
 	
 }

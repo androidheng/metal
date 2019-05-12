@@ -295,4 +295,12 @@
   	GROUP BY  a.`createtime` 
   	HAVING DATE_FORMAT(a.`createtime`,'%Y-%m')=#{date,jdbcType=VARCHAR}
   </select>
+   <select id="findEveryMonth" resultMap="BaseResultMap" >
+  	SELECT SUM(a.`quantity`) quantity,SUM(a.`goodsweight`) goodsweight,SUM(a.`machine1`) machine1,SUM(a.`machine2`) machine2, SUM(a.`maintenance`) maintenance, SUM(a.`wage`)  wage
+	 FROM tb_base a
+	 WHERE DATE_FORMAT(a.`createtime`,'%Y-%m')=#{date,jdbcType=VARCHAR}
+	   <if test="mid != null" >
+        and mid = #{mid,jdbcType=INTEGER}
+      </if>
+  </select>
 </mapper>

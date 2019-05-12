@@ -288,4 +288,22 @@
       createtime = #{createtime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="findEveryMonth" resultMap="BaseResultMap" >
+  	SELECT a.`quantity`/12 quantity,a.`goodsweight`/12 goodsweight,a.`machine1`/12 machine1,a.`machine2`/12 machine2,a.`maintenance`/12 maintenance,a.`wage`/12  wage
+	 FROM tb_yearplan a
+	 WHERE a.`createtime`=#{date,jdbcType=VARCHAR}
+	   <if test="mid != null" >
+        and mid = #{mid,jdbcType=INTEGER}
+      </if>
+  </select>
+  <select id="findBaiFen" resultType="map" >
+  	SELECT (SUM(a.`quantity`)/(SELECT aa.`quantity`/12 FROM tb_yearplan aa WHERE aa.`createtime`=#{year,jdbcType=VARCHAR} limit 1))*100 quantity,
+
+	(SUM(a.`goodsweight`)/(SELECT aa.`goodsweight`/12 FROM tb_yearplan aa WHERE aa.`createtime`=#{year,jdbcType=VARCHAR}  limit 1))*100 goodsweight
+ 	FROM tb_base a
+ 	WHERE DATE_FORMAT(a.`createtime`,'%Y-%m')=#{month,jdbcType=VARCHAR}
+	   <if test="mid != null" >
+        and mid = #{mid,jdbcType=INTEGER}
+      </if>
+  </select>
 </mapper>

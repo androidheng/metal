@@ -91,8 +91,8 @@ public class UserServiceImpl implements UserService {
 		
 		if(user!=null){			
 				
-			if(!StringUtils.isEmpty("")) {
-				
+			if(!StringUtils.isEmpty(user.getUsername())) {
+				criteria.andUsernameLike("%"+user.getUsername()+"%");
 			}
 		}
 		

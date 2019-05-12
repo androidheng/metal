@@ -103,5 +103,10 @@ public class BaseServiceImpl implements BaseService {
 			
 			return baseMapper.findHistoryData(mid,date);
 		}
+
+		@Override
+		public List<TbBase> findDataByMonth(String date,Integer mid) {
+			return baseMapper.findEveryMonth(date,mid);
+		}
 	
 }
