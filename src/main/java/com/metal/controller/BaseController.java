@@ -194,8 +194,9 @@ public class BaseController {
 				}
 				series.add(data1);
 				series.add(data2);
-				resultMap.put("data", series);
 				resultMap.put("xdata", xDatas);
+				 resultMap.put("data1", data1);
+				 resultMap.put("data2", data2);
 				return resultMap;		
 			}
 			return "no login";
