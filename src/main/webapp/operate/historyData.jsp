@@ -77,10 +77,10 @@
     	        areaStyle: {}
     	    }]
     	};
-    var barOption = {
+    var barOption =  {
     	    xAxis: {
     	        type: 'category',
-    	        data: []
+    	        data: ['2019-05-11','2019-05-11']
     	    },
     	    yAxis: {
     	        type: 'value'
@@ -90,6 +90,7 @@
     	        type: 'bar'
     	    }]
     	};
+
    
     layui.use('laydate', function(){
     	  var laydate = layui.laydate;
