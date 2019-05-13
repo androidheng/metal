@@ -44,7 +44,7 @@
 
                 <div class="custom-logo">
                     <img src="<%=basePath%>assets/images/logo.png" alt=""/>
-                    <h1 style="font-size:16px;">空气质量监测与预警系统</h1>
+                    <h1 style="font-size:16px;">生产数据智能分析系统</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">

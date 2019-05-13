@@ -162,7 +162,7 @@ public class YearplanController {
 		 return resultMap;		
 	 }
 	 @ResponseBody
-	 @RequestMapping("/findZhu")
+	 @RequestMapping(value="/findZhu",produces = "application/json;charset=UTF-8")
 	 public Object findZhu(String date,Integer mid  ){
 		 List<Map<String, Object>> resultList=new ArrayList<>();
 		 Map<String, Object> result=new HashMap<>();

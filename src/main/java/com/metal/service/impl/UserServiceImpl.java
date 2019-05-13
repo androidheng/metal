@@ -94,6 +94,7 @@ public class UserServiceImpl implements UserService {
 			if(!StringUtils.isEmpty(user.getUsername())) {
 				criteria.andUsernameLike("%"+user.getUsername()+"%");
 			}
+			criteria.andUsertypeEqualTo(0);
 		}
 		
 		Page<TbUser> page= (Page<TbUser>)userMapper.selectByExample(example);		
