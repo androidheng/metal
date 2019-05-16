@@ -79,7 +79,8 @@
              {field: 'carno', title: '车牌号' }
             ,{field: 'minename', title: '矿山名'}
             ,{field: 'nums', title: '运载次数'}
-            ,{field: 'tonnage', title: '运载吨数'}
+            ,{field: 'nums', title: '车辆总趟数'}
+            ,{field: 'tonnage', title: '运载总吨数'}
             ,{field: 'warename', title: '仓库名'}
             ,{field: 'createtime', title: '创建时间'}
            

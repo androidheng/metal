@@ -23,9 +23,7 @@
             
             <ul class="layui-nav layui-layout-left">
                 <li class="layui-nav-item slide-sidebar" lay-unselect>
-                    
                     <a href="javascript:;" class="icon-font"><i class="ai ai-menufold"></i></a>
-                    
                 </li>
             </ul>
             <ul class="layui-nav layui-layout-right">
@@ -43,13 +41,13 @@
             <div class="layui-side-scroll">
 
                 <div class="custom-logo">
-                    <img src="<%=basePath%>assets/images/logo.png" alt=""/>
+                    <!-- <img src="<%=basePath%>assets/images/logo.png" alt=""/> -->
                     <h1 style="font-size:16px;">生产数据智能分析系统</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon">&#xe612;</i>
+                                <i class="layui-icon layui-icon-group">&#xe613;</i>
                                 <em>用户管理</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -59,7 +57,7 @@
                     </li>  
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon layui-icon-chart-screen">&#xe629;</i>
+                                <i class="layui-icon layui-icon-read">&#xe705;</i>
                                 <em>信息管理</em>
                             </a>
                             <dl class="layui-nav-child">

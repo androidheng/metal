@@ -45,7 +45,7 @@
                       <button class="layui-btn" id="importExcel">导出Excel</button>
                     </div>
                     
-                     <div id="line" style="width: 100%;height:600px;"></div>
+                     <div id="line" style="width: 100%;height:600px;margin-top:50px;"></div>
                      <div id="bar" style="width: 100%;height:600px; margin-top:50px;"></div>
                     
                     <table id="demo" lay-filter="demo" ></table>
@@ -67,6 +67,9 @@
     	        type: 'category',
     	        boundaryGap: false,
     	        data: []
+    	    },
+    	    legend: {
+    	        data:['实际土方量','实际货物产量','挖机耗油量','卡车耗油量']
     	    },
     	    yAxis: {
     	        type: 'value'
@@ -102,6 +105,9 @@
     	            type : 'value'
     	        }
     	    ],
+    	    legend: {
+    	        data:['实际土方量','实际货物产量','挖机耗油量','卡车耗油量']
+    	    },
     	    series : [
     	        {
     	           
@@ -200,8 +206,8 @@
                  dataType:'json',//预期服务器返回的数据类型
                  contentType: "application/json; charset=utf-8",
                  success:function(res){//res为相应体,function为回调函数
-                	 barOption.series[0].data = res.data1;
-                	 barOption.series[1].data = res.data2;
+                	 barOption.series = res.series;
+                	
                 	 barOption.xAxis[0].data = res.xdata;
                 	 console.log('barOption:',barOption)
                  	 bar.setOption(barOption)

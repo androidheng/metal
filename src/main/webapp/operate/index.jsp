@@ -43,13 +43,13 @@
             <div class="layui-side-scroll">
 
                 <div class="custom-logo">
-                    <img src="<%=basePath%>assets/images/logo.png" alt=""/>
+                    <!-- <img src="<%=basePath%>assets/images/logo.png" alt=""/> -->
                     <h1 style="font-size:16px;">生产数据智能分析系统</h1>
                 </div>
                 <ul id="Nav" class="layui-nav layui-nav-tree">
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon">&#xe612;</i>
+                                <i class="layui-icon ">&#xe770;</i>
                                 <em>数据管理</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -62,7 +62,7 @@
                     </li>  
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon layui-icon-water">&#xe636;</i>
+                                <i class="layui-icon layui-icon-form">&#xe63c;</i>
                                 <em>数据统计</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -73,7 +73,7 @@
                     </li>  
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon layui-icon-chart-screen">&#xe629;</i>
+                                <i class="layui-icon layui-icon-table">&#xe62d;</i>
                                 <em>报表</em>
                             </a>
                             <dl class="layui-nav-child">
@@ -84,7 +84,7 @@
                     </li>  
                     <li class="layui-nav-item">
                             <a >
-                                <i class="layui-icon layui-icon-chart">&#xe62c;</i>
+                                <i class="layui-icon ">&#xe653;</i>
                                 <em>总体指标对比</em>
                             </a>
                             <dl class="layui-nav-child">
