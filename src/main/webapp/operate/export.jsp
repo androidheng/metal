@@ -12,10 +12,18 @@
 	<body>
 		<div class="input-group-btn" style="text-align: center;">
 			<button type="button" onclick="doHistorydata();">导出历史数据</button><br><br>
+			<button type="button" onclick="doYundata();">导出运载数据</button><br><br>
+			<button type="button" onclick="doYundata2();">导出报表数据</button><br><br>
 		</div>
 		<script type="text/javascript">
 		function doHistorydata(){
 			location.href='<%=basePath%>base/exporthistory?mid=1&date=2019-05';
+		}
+		function doYundata(){
+			location.href='<%=basePath%>data/exportYun?type=0&date=2019-05-11';
+		}
+		function doYundata2(){
+			location.href='<%=basePath%>data/exportstatistical?type=0&date=2019-05-11';
 		}
 		</script>
 	</body>

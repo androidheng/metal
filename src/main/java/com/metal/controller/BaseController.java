@@ -158,16 +158,30 @@ public class BaseController {
 			Map<String, Object> mp2=new HashMap<String, Object>();
 			mp2.put("name", "实际货物产量");
 			mp2.put("type", "line");
+			List<String>machine1List=new ArrayList<String>();
+			Map<String, Object> mp3=new HashMap<String, Object>();
+			mp3.put("name", "挖机耗油量");
+			mp3.put("type", "line");
+			List<String>machine2List=new ArrayList<String>();
+			Map<String, Object> mp4=new HashMap<String, Object>();
+			mp4.put("name", "卡车耗油量");
+			mp4.put("type", "line");
 			List<String> goodsweightList=new ArrayList<String>();
 			for(TbBase d:datas){
 				xAxisData.add(d.getCreatetime());
 				quantityList.add(d.getQuantity());
 				goodsweightList.add(d.getGoodsweight());
+				machine1List.add(d.getMachine1());
+				machine2List.add(d.getMachine2());
 			}
 			mp1.put("data", quantityList);
 			mp2.put("data", goodsweightList);
+			mp3.put("data", machine1List);
+			mp4.put("data", machine2List);
 				resultList.add(mp1);
 				resultList.add(mp2);
+				resultList.add(mp3);
+				resultList.add(mp4);
 			resultMap.put("data", xAxisData);
 			resultMap.put("series", resultList);
 			return resultMap;		
@@ -179,24 +193,45 @@ public class BaseController {
 			user=new TbUser();
 			user.setUsertype(1);
 			if(user!=null){
-				List<Object> series=new ArrayList<>();
-				List<String> data1=new ArrayList<>();
-				List<String> data2=new ArrayList<>();
 				List<TbBase> datas=baseService.findHistoryData(mid,date);
 				Map<String, Object> resultMap=new HashMap<String, Object>();
 				List<Map<String, Object>> resultList=new ArrayList<Map<String,Object>>();
 				List<String> xDatas=new ArrayList<>(); 
-				List<String> mDatas=new ArrayList<>();
+				
+				Map<String, Object> mp1=new HashMap<String, Object>();
+				mp1.put("name", "实际土方量");
+				mp1.put("type", "bar");
+				List<String> quantityList=new ArrayList<String>();
+				Map<String, Object> mp2=new HashMap<String, Object>();
+				mp2.put("name", "实际货物产量");
+				mp2.put("type", "bar");
+				List<String>machine1List=new ArrayList<String>();
+				Map<String, Object> mp3=new HashMap<String, Object>();
+				mp3.put("name", "挖机耗油量");
+				mp3.put("type", "bar");
+				List<String>machine2List=new ArrayList<String>();
+				Map<String, Object> mp4=new HashMap<String, Object>();
+				mp4.put("name", "卡车耗油量");
+				mp4.put("type", "bar");
+				List<String> goodsweightList=new ArrayList<String>();
+				
 				for(TbBase d:datas){
 					xDatas.add(d.getCreatetime());
-					data1.add(d.getQuantity());
-					data2.add(d.getGoodsweight());
+					quantityList.add(d.getQuantity());
+					goodsweightList.add(d.getGoodsweight());
+					machine1List.add(d.getMachine1());
+					machine2List.add(d.getMachine2());
 				}
-				series.add(data1);
-				series.add(data2);
-				resultMap.put("xdata", xDatas);
-				 resultMap.put("data1", data1);
-				 resultMap.put("data2", data2);
+				mp1.put("data", quantityList);
+				mp2.put("data", goodsweightList);
+				mp3.put("data", machine1List);
+				mp4.put("data", machine2List);
+					resultList.add(mp1);
+					resultList.add(mp2);
+					resultList.add(mp3);
+					resultList.add(mp4);
+				 resultMap.put("xdata", xDatas);
+				 resultMap.put("series", resultList);
 				return resultMap;		
 			}
 			return "no login";
@@ -241,7 +276,6 @@ public class BaseController {
 				
 				try {  	
 				response.reset(); //清除buffer缓存  
-				//Map<String,Object> map=new HashMap<String,Object>();  
 				// 指定下载的文件名  
 				response.setContentType("application/vnd.ms-excel;charset=UTF-8");  
 				String name=System.currentTimeMillis()+"";

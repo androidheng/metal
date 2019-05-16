@@ -281,7 +281,7 @@
  	SELECT * FROM tb_data a WHERE DATE_FORMAT(a.createtime,'%Y') =#{date,jdbcType=VARCHAR}
   </select>
   <select id="findDay" resultMap="BaseResultMap">
- 		SELECT a.`carno`,a.`minename`,a.`warename`,SUM(a.`tonnage`) tonnage,
+		SELECT a.`carno`,a.`minename`,a.`warename`,SUM(a.`tonnage`) tonnage,
 		(SELECT COUNT(0) FROM tb_data aa WHERE aa.carno=a.`carno`) nums
 		FROM tb_data a WHERE a.`createtime` =#{date,jdbcType=VARCHAR}
 		<if test="wid != null" >
