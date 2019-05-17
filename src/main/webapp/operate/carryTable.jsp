@@ -58,6 +58,7 @@
                          </div>
                         </div>
                       <button class="layui-btn" data-type="reload">查询</button>
+                      <button class="layui-btn" id="importExcel">导出Excel</button>
                     </div>
                     <table id="demo" lay-filter="demo" ></table>
                 </div>
@@ -117,6 +118,13 @@
     	    var type = $(this).data('type');
     	    active[type] ? active[type].call(this) : '';
     	});
+       $(document).on('click','#importExcel',function(){
+      	 let type = $("#type").val()
+      	 let date = $("#date").val()
+         if(!type) return alert('请先选择 报表类型');
+      	 if(!date) return alert('请先选日期');
+      	 location.href="<%=basePath%>data/exportYun?type="+type+"&date="+date;
+       });
      
        form.on('select(business)', function(data){
     	   switch (data.value) {
