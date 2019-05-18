@@ -159,7 +159,7 @@ public class UserController {
 		@RequestMapping("/myInfo")
 		public Result myInfo(@RequestBody TbUser user,HttpSession session){
 			TbUser loginUser=(TbUser) session.getAttribute("login");
-			if(loginUser!=null) {
+			if(loginUser!=null) { 
 				try {  
 					userService.update(loginUser);
 					return new Result(true, loginUser);
