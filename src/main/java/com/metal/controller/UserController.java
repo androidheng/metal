@@ -155,4 +155,21 @@ public class UserController {
 			}
 			
 		}
+		@ResponseBody
+		@RequestMapping("/myInfo")
+		public Result myInfo(@RequestBody TbUser user,HttpSession session){
+			TbUser loginUser=(TbUser) session.getAttribute("login");
+			if(loginUser!=null) {
+				try {  
+					userService.update(loginUser);
+					return new Result(true, loginUser);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return new Result(false, "登录失败");
+				}
+			}else {
+				return new Result(false, "请先登录");
+			}
+			
+		}
 }
