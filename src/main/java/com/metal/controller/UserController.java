@@ -157,7 +157,7 @@ public class UserController {
 		}
 		@ResponseBody
 		@RequestMapping("/myInfo")
-		public Result myInfo(@RequestBody TbUser user,HttpSession session){
+		public Result myInfo(HttpSession session){
 			TbUser loginUser=(TbUser) session.getAttribute("login");
 			if(loginUser!=null) { 
 				try {  
