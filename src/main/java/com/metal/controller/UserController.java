@@ -137,4 +137,22 @@ public class UserController {
 				return new Result(false, "登录失败");
 			}
 		}
+		@ResponseBody
+		@RequestMapping("/updatePass")
+		public Result updatePass(@RequestBody TbUser user,HttpSession session){
+			TbUser loginUser=(TbUser) session.getAttribute("login");
+			if(loginUser!=null) {
+				try {
+					loginUser.setPassword(user.getPassword());
+					userService.update(loginUser);
+					return new Result(true, "修改成功");
+				} catch (Exception e) {
+					e.printStackTrace();
+					return new Result(false, "登录失败");
+				}
+			}else {
+				return new Result(false, "请先登录");
+			}
+			
+		}
 }
