@@ -142,7 +142,7 @@ public class UserController {
 		public Result updatePass(@RequestBody TbUser user,HttpSession session){
 			TbUser loginUser=(TbUser) session.getAttribute("login");
 			if(loginUser!=null) {
-				try {
+				try {  
 					loginUser.setPassword(user.getPassword());
 					userService.update(loginUser);
 					return new Result(true, "修改成功");
