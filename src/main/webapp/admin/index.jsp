@@ -28,9 +28,11 @@
             </ul>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">BieJun</a>
+                    <a >
+                        <a id="admin"></a>
+                    </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">帮助中心</a></dd>
+                        <dd><a href="<%=basePath%>updatePassword.jsp">修改密码</a></dd>
                         <dd><a href="<%=basePath%>login.jsp">退出</a></dd>
                     </dl>
                 </li>
@@ -76,7 +78,7 @@
                 <div id="appTabPage" class="layui-tab-content"></div>
             </div>
         </div>
-
+         <table id="demo" lay-filter="demo" ></table>
         <div class="layui-footer">
             <p>© 2018 DEMO</p>
         </div>
@@ -85,5 +87,29 @@
     </div>
     <script src="<%=basePath%>assets/layui.js"></script>
     <script src="<%=basePath%>js/index.js" data-main="home"></script>
+    <script>
+    layui.use('table', function(){
+   	 var table = layui.table,$=layui.$;
+    	getUserInfo()
+   	 //获取数据下拉框
+     function getUserInfo(){
+    	 $.ajax({
+             url:"<%=basePath%>user/myInfo",
+             type:'post',//method请求方式，get或者post
+             dataType:'json',//预期服务器返回的数据类型
+             contentType: "application/json; charset=utf-8",
+             success:function(res){//res为相应体,function为回调函数
+            	console.log(res)
+            	$("#admin").html(res.data.username)
+             },
+             error:function(){
+              
+             }
+         });
+     }
+     
+   });
+        
+    </script>
 </body>
 </html>

@@ -12,6 +12,14 @@
     <link rel="icon" href="/favicon.ico">
     <title>管理后台</title>
     <style>
+       body{
+        
+         background-image: url('<%=basePath%>assets/images/login.jpg');
+         background-position: center center;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-size: cover;
+       }
        h4{
          width:100%;
          text-align:center;
