@@ -161,7 +161,6 @@ public class UserController {
 			TbUser loginUser=(TbUser) session.getAttribute("login");
 			if(loginUser!=null) { 
 				try {  
-					userService.update(loginUser);
 					return new Result(true, loginUser);
 				} catch (Exception e) {
 					e.printStackTrace();
