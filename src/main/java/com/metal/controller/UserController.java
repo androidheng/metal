@@ -160,7 +160,7 @@ public class UserController {
 		public Result myInfo(HttpSession session){
 			TbUser loginUser=(TbUser) session.getAttribute("login");
 			if(loginUser!=null) { 
-				try {  
+				try {   
 					return new Result(true, loginUser);
 				} catch (Exception e) {
 					e.printStackTrace();
